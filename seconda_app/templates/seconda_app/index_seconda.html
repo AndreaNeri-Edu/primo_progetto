@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {{ block.super }} | Index Seconda App {% endblock title %}</title>
+</head>
+<body>
+    {% block content %}
+    <ol>
+        <li><a href="{% url 'index_root' %}">Index Root</a></li>
+        <li><a href="{% url 'seconda_app:es_if' %}">Esempio IF</a></li>
+    </ol>
+    {% endblock content %}
+</body>
+</html>
