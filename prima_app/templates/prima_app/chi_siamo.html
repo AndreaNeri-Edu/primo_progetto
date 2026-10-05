@@ -1,12 +1,15 @@
 <!DOCTYPE html>
+{% extends "base.html" %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi siamo</title>
+    <title>{% block title %} {{ block.super }} | Chi siamo {% endblock title %}</title>
 </head>
 <body>
+    {% block content %}
     <h1>Chi siamo</h1>
     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. A aperiam voluptas molestias pariatur earum sint, accusamus alias, perferendis, cumque quas explicabo omnis animi quod iure laboriosam unde fuga voluptates doloremque!</p>
+    {% endblock content %}
 </body>
 </html>
