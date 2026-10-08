@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {{ block.super }} | FOR {% endblock title %}</title>
+</head>
+<body>
+    {% block content %}
+        <p>ciclo di un elenco di elementi con la variabile <b>forloop.counter</b>:</p>
+        {% for x in list2 %}
+            <i>{{ forloop.counter }}:</i> {{ x }}</br>
+        {% endfor %}
+        </br>
+
+        <p>ciclo dell'elenco con indice che parte da zero tramite <b>forloop.counter0</b>:</p>
+        {% for x in list2 %}
+            <i>{{ forloop.counter0 }}:</i> {{ x }}</br>
+        {% endfor %}
+        </br>
+
+        <p>Stampa solo del primo elemento usando la variabile <b>forloop.first</b>:</p>
+        {% for x in list2 %}
+            {% if forloop.first %}
+                <i>Il primo elemento è:</i> {{ x }}</br>
+            {% endif %}
+        {% endfor %}
+        </br>
+
+        <p>Stampa dell'ultimo elemento usando la variabile <b>forloop.last</b>:</p>
+        {% for x in list2 %}
+            {% if forloop.last %}
+                <i>L'ultimo elemento è:</i> {{ x }}</br>
+            {% endif %}
+        {% endfor %}
+        </br>
+
+        <p>Stampa dell'elenco in ordine inverso usando la variabile <b>reversed</b>:</p>
+        {% for x in list2 reversed %}
+            <i>elemento:</i> {{ x }}</br>
+        {% endfor %}
+        </br>
+
+        <h2>Stampa contenuto del dizionario <b>(my_dict)</b>:</h2>
+        <ul>
+        {% for key, value in my_dict.items %}
+            <li>{{ key }}: {{ value }}</li>
+        {% endfor %}
+        </ul>
+    {% endblock content %}
+</body>
+</html>
