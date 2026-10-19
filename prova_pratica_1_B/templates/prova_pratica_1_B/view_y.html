@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {{ block.super }} | Pari {% endblock title %}</title>
+</head>
+<body>
+    {% block content %} 
+        <p>Elenco variabili:</p>
+        {% for x in lista1 %}
+            <i>{{ forloop.counter }}:</i> {{ x }}</br>
+        {% endfor %}
+        </br>
+        {% if pari >= 15 %}
+        <p>Il numero di elementi pari è: <i style="color: green;">{{ pari }}</i></p>
+        {% else %}
+        <p>Il numero di elementi pari è: <i style="color: red;">{{ pari }}</i></p>
+        {% endif %}
+    {% endblock content %}
+</body>
+</html>

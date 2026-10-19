@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {{ block.super }} | Massimo {% endblock title %}</title>
+</head>
+<body>
+    {% block content %}
+
+    <style>
+        .verde{
+            color: green;
+        }
+    </style>
+
+    <p>Elenco variabili:</p>
+        {% if var1 > var2 %}
+            {% if var1 > var3 %}
+                <p>var1: <i class="verde">{{ var1 }}</i> (Numero maggiore)</p>
+                <p>var2: {{ var2 }}</p>
+                <p>var3: {{ var3 }}</p>
+            {% else %}
+                <p>var1: {{ var1 }}</p>
+                <p>var2: {{ var2 }}</p>
+                <p>var3: <i class="verde">{{ var3 }}</i> (Numero maggiore)</p>
+            {% endif %}
+        {% elif var2 > var3 %}
+            <p>var1: {{ var1 }}</p>
+            <p>var2: <i class="verde">{{ var2 }}</i> (Numero maggiore)</p>
+            <p>var3: {{ var3 }}</p>     
+        {% else %}
+            <p>var1: {{ var1 }}</p>
+            <p>var2: {{ var2 }}</p>
+            <p>var3: <i class="verde">{{ var3 }}</i> (Numero maggiore)</p>
+        {% endif %}
+    {% endblock content %}
+</body>
+</html>
