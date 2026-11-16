@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Articoli del giornalista{% endblock title %}
+
+{% block content %}
+    <h1>Articoli del giornalista</h1>
+
+    {% for articolo in articoli %}
+        <hr>
+        <article>
+            <p><strong>Titolo:</strong> <a href="{% url 'news:articolo_detail' articolo.pk %}">{{ articolo.titolo }}</a></p>
+            <p><strong>Autore:</strong> {{ articolo.giornalista }}</p>
+            {{ articolo.contenuto }}
+        </article>
+    {% empty %}
+        <p>Non ci sono articoli da mostrare.</p>
+    {% endfor %}
+{% endblock content %}
