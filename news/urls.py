@@ -3,8 +3,8 @@ from .views import index, home, articoloDetailView, giornalistaDetailView, lista
 
 app_name="news"
 urlpatterns=[
-    path('', home, name='homeviews'),
-    path('index/', index, name='index'),
+    path('', index, name='index'),
+    path('home/', home, name='homeviews'),
     path('lista_articoli/', lista_articoli, name='lista_articoli'),
     path("lista_articoli/<int:giornalista_id>", lista_articoli, name="lista_articoli_giornalista"),
     path("lista_giornalisti/", giornalistaDetailView, name="lista_giornalisti"),
