@@ -104,10 +104,10 @@ def queryBase(request):
     articoli_giornalisti = Articolo.objects.filter(giornalista__in=giornalisti_nati)
 
     # 11. Il giornalista più giovane:
-    giornalista_giovane = Giornalista.objects.order_by('anno_nascita').first()
+    giornalista_giovane = Giornalista.objects.order_by('-anno_nascita').first()
 
     # 12. Il giornalista più anziano:
-    giornalista_anziano = Giornalista.objects.order_by('-anno_nascita').first()
+    giornalista_anziano = Giornalista.objects.order_by('anno_nascita').first()
 
     # 13. Gli ultimi 5 articoli pubblicati:
     ultimi = Articolo.objects.order_by('-data')[:5]
