@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block title %}Risultati delle query{% endblock title %}
+
+{% block content %}
+    <h1>Risultati delle query</h1>
+    <br>
+
+    <h2>1. Articoli dei giornalisti con cognome Rossi</h2>
+    {% for articolo in articoli_cognome %}
+        <p><strong>Titolo:</strong> {{ articolo.titolo }}</p>
+        <p><strong>Autore:</strong> {{ articolo.giornalista }}</p>
+    {% empty %}
+        <p>Nessun articolo trovato.</p>
+    {% endfor %}
+    <hr>
+
+    <h2>2. Numero totale di articoli</h2>
+    <p>{{ numero_totale_articoli }}</p>
+    <hr>
+
+    <h2>3. Numero di articoli del giornalista con ID 1</h2>
+    {% if giornalista_1 %}
+        <p><strong>Giornalista:</strong> {{ giornalista_1 }}</p>
+        <p><strong>Numero di articoli:</strong> {{ numero_articoli_giornalista_1 }}</p>
+    {% else %}
+        <p>Non esiste un giornalista con ID 1.</p>
+    {% endif %}
+    <hr>
+
+    <h2>4. Articoli ordinati per visualizzazioni decrescenti</h2>
+    {% for articolo in articoli_ordinati %}
+        <p><strong>Titolo:</strong> {{ articolo.titolo }}</p>
+        <p><strong>Visualizzazioni:</strong> {{ articolo.visualizzazioni }}</p>
+    {% empty %}
+        <p>Nessun articolo trovato.</p>
+    {% endfor %}
+    <hr>
+
+    <h2>5. Articoli senza visualizzazioni</h2>
+    {% for articolo in articoli_senza_visualizzazioni %}
+        <p>{{ articolo.titolo }}</p>
+    {% empty %}
+        <p>Nessun articolo trovato.</p>
+    {% endfor %}
+    <hr>
+
+    <h2>6. Articolo più visualizzato</h2>
+    {% if articolo_piu_visualizzato %}
+        <p><strong>Titolo:</strong> {{ articolo_piu_visualizzato.titolo }}</p>
+        <p><strong>Visualizzazioni:</strong> {{ articolo_piu_visualizzato.visualizzazioni }}</p>
+    {% else %}
+        <p>Non ci sono articoli.</p>
+    {% endif %}
+    <hr>
+
+    <h2>7. Giornalisti nati dopo il 1 gennaio 1990</h2>
+    {% for giornalista in giornalisti_data %}
+        <p>{{ giornalista }} — {{ giornalista.anno_nascita|date:"d/m/Y" }}</p>
+    {% empty %}
+        <p>Nessun giornalista trovato.</p>
+    {% endfor %}
+    <hr>
+
+    <h2>8. Articoli pubblicati il 1 gennaio 2023</h2>
+    {% for articolo in articoli_del_giorno %}
+        <p>{{ articolo.titolo }}</p>
+    {% empty %}
+        <p>Nessun articolo trovato.</p>
+    {% endfor %}
+    <hr>
+
+    <h2>9. Articoli pubblicati nel 2023</h2>
+    {% for articolo in articoli_periodo %}
+        <p>{{ articolo.titolo }} — {{ articolo.data|date:"d/m/Y" }}</p>
+    {% empty %}
+        <p>Nessun articolo trovato.</p>
+    {% endfor %}
+    <hr>
+
+    <h2>10. Articoli dei giornalisti nati prima del 1980</h2>
+    {% for articolo in articoli_giornalisti %}
+        <p><strong>Titolo:</strong> {{ articolo.titolo }}</p>
+        <p><strong>Autore:</strong> {{ articolo.giornalista }}</p>
+    {% empty %}
+        <p>Nessun articolo trovato.</p>
+    {% endfor %}
+    <hr>
+
+    <h2>11. Giornalista più giovane</h2>
+    {% if giornalista_giovane %}
+        <p>{{ giornalista_giovane }} — {{ giornalista_giovane.anno_nascita|date:"d/m/Y" }}</p>
+    {% else %}
+        <p>Nessun giornalista trovato.</p>
+    {% endif %}
+    <hr>
+
+    <h2>12. Giornalista più anziano</h2>
+    {% if giornalista_anziano %}
+        <p>{{ giornalista_anziano }} — {{ giornalista_anziano.anno_nascita|date:"d/m/Y" }}</p>
+    {% else %}
+        <p>Nessun giornalista trovato.</p>
+    {% endif %}
+    <hr>
+
+    <h2>13. Ultimi 5 articoli pubblicati</h2>
+    {% for articolo in ultimi %}
+        <p>{{ articolo.titolo }} — {{ articolo.data|date:"d/m/Y" }}</p>
+    {% empty %}
+        <p>Nessun articolo trovato.</p>
+    {% endfor %}
+    <hr>
+
+    <h2>14. Articoli con almeno 100 visualizzazioni</h2>
+    {% for articolo in articoli_minime_visualizzazioni %}
+        <p>{{ articolo.titolo }} — {{ articolo.visualizzazioni }} visualizzazioni</p>
+    {% empty %}
+        <p>Nessun articolo trovato.</p>
+    {% endfor %}
+    <hr>
+
+    <h2>15. Articoli con la parola "importante" nel titolo</h2>
+    {% for articolo in articoli_parola %}
+        <p>{{ articolo.titolo }}</p>
+    {% empty %}
+        <p>Nessun articolo trovato.</p>
+    {% endfor %}
+{% endblock content %}

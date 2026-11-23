@@ -5,8 +5,8 @@ import datetime
 def index_root(request):
     return render(request, "index_root.html")
 
-def index_seconda(request):
-    return render(request, "index_seconda.html")
+def index(request):
+    return render(request, "seconda_app/index.html")
 
 def es_if(request):
     dic = {
@@ -14,7 +14,7 @@ def es_if(request):
         "var2": 200,
         "var3": 300,
     }
-    return render(request, "es_if.html", dic)
+    return render(request, "seconda_app/es_if.html", dic)
 
 def es_if_else_elif(request):
     dic = {
@@ -22,7 +22,7 @@ def es_if_else_elif(request):
         "var2": 200,
         "var3": 300,
     }
-    return render(request, "es_if_else_elif.html", dic)
+    return render(request, "seconda_app/es_if_else_elif.html", dic)
 
 def es_for(request):
     dic= {
@@ -30,4 +30,4 @@ def es_for(request):
         'list2': [1, datetime.date(2019,7,16), 'Do not give up'],
         'my_dict': {'chiave1': 'Valore 1', 'chiave2': 'Valore 2'}
     }
-    return render(request, "es_for.html", dic)
+    return render(request, "seconda_app/es_for.html", dic)
