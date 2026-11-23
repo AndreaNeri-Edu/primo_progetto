@@ -1,18 +1,26 @@
 {% extends 'base.html' %}
 
-{% block title %}Articoli del giornalista{% endblock title %}
+{% block title %}{% if filtrata_per_giornalista %}Articoli di un giornalista{% else %}Tutti gli Articoli{% endif %}{% endblock title %}
 
 {% block content %}
-    <h1>Articoli del giornalista</h1>
+    {% if filtrata_per_giornalista %}
+        <h1>Articoli di un giornalista:</h1>
+    {% else %}
+        <h1>Tutti gli Articoli:</h1>
+    {% endif %}
 
     {% for articolo in articoli %}
-        <hr>
         <article>
             <p><strong>Titolo:</strong> <a href="{% url 'news:articolo_detail' articolo.pk %}">{{ articolo.titolo }}</a></p>
-            <p><strong>Autore:</strong> {{ articolo.giornalista }}</p>
-            {{ articolo.contenuto }}
+            <p><strong>Contenuto:</strong> {{ articolo.contenuto }}</p>
+            <p><strong>Autore:</strong> <a href="{% url 'news:giornalista_detail' articolo.giornalista.pk %}">{{ articolo.giornalista }}</a></p>
         </article>
+        <hr>
     {% empty %}
-        <p>Non ci sono articoli da mostrare.</p>
+        {% if filtrata_per_giornalista %}
+            <p>Questo giornalista non ha articoli da mostrare.</p>
+        {% else %}
+            <p>Non ci sono articoli da mostrare.</p>
+        {% endif %}
     {% endfor %}
 {% endblock content %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Tutti i giornalisti{% endblock title %}
+
+{% block content %}
+    <h1>Tutti i giornalisti:</h1>
+
+    {% for giornalista in giornalisti %}
+        <article>
+            <p><strong>Nome:</strong> <a href="{% url 'news:giornalista_detail' giornalista.pk %}">{{ giornalista.nome }}</a></p>
+            <p><strong>Cognome:</strong> {{ giornalista.cognome }}</p>
+        </article>
+        <hr>
+    {% empty %}
+        <p>Non ci sono giornalisti da mostrare.</p>
+    {% endfor %}
+{% endblock content %}

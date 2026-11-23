@@ -54,7 +54,8 @@ def index(request):
 
 def home (request):
     articoli = Articolo.objects.all()
-    context = { 'articoli': articoli }
+    giornalisti = Giornalista.objects.all()
+    context = { 'articoli': articoli, 'giornalisti': giornalisti }
     return render(request, "news/homepage.html", context)
 
 
@@ -64,9 +65,28 @@ def articoloDetailView(request, pk):
     return render(request, "news/articolo_detail.html", context)
 
 
-def lista_articoli(request, giornalista_id):
-    articoli = Articolo.objects.filter(giornalista_id=giornalista_id)
-    context = { 'articoli': articoli }
+def giornalistaDetailView(request, pk=None):
+    if pk is None:
+        giornalisti = Giornalista.objects.all()
+        return render(request, "news/lista_giornalisti.html", {
+            'giornalisti': giornalisti,
+        })
+
+    giornalista = Giornalista.objects.get(pk=pk)
+    articoli = giornalista.articoli.all()
+    context = { 'giornalista': giornalista, 'articoli': articoli }
+    return render(request, "news/giornalista_detail.html", context)
+
+
+def lista_articoli(request, giornalista_id=None):
+    if giornalista_id is None:
+        articoli = Articolo.objects.all()
+    else:
+        articoli = Articolo.objects.filter(giornalista_id=giornalista_id)
+    context = {
+        'articoli': articoli,
+        'filtrata_per_giornalista': giornalista_id is not None,
+    }
     return render(request, "news/lista_articoli.html", context)
 
 def queryBase(request):

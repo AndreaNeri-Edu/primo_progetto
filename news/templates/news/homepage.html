@@ -1,17 +1,25 @@
 {% extends 'base.html' %}
 
-{% block title %} Tutti gli articoli {% endblock title %}
+{% block title %}News{% endblock title %}
 
 {% block content %}
-    <h1>Tutti gli articoli</h1>
-    <br>
+    <h2>Articoli:</h2>
 
     {% for articolo in articoli %}
-        <p><strong>Titolo:</strong> <a href="{% url 'news:articolo_detail' articolo.pk %}">{{ articolo.titolo }}</a></p>
-        <p><strong>Autore:</strong> {{ articolo.giornalista }}</p>
-        <p>{{ articolo.contenuto }}</p>
+        <p><strong>Titolo:</strong> {{ articolo.titolo }}</p>
+        <p><strong>Contenuto:</strong> {{ articolo.contenuto }}</p>
+        <p><strong>Autore:</strong>{{ articolo.giornalista }}</p>
         <hr>
     {% empty %}
         <p>Non ci sono articoli da mostrare.</p>
+    {% endfor %}
+
+    <h2>Giornalisti:</h2>
+    {% for giornalista in giornalisti %}
+        <p><strong>Nome:</strong> {{ giornalista.nome }}</p>
+        <p><strong>Cognome:</strong> {{ giornalista.cognome }}</p>
+        <hr>
+    {% empty %}
+        <p>Non ci sono giornalisti da mostrare.</p>
     {% endfor %}
 {% endblock content %}
