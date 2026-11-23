@@ -125,4 +125,49 @@
     {% empty %}
         <p>Nessun articolo trovato.</p>
     {% endfor %}
+    <hr>
+
+    <h2>16. Articoli pubblicati a gennaio 2023</h2>
+    <p>Mostra gli articoli con data di pubblicazione compresa tra il 1 e il 31 gennaio 2023.</p>
+    {% for articolo in articoli_mese_anno %}
+        <p>{{ articolo.titolo }} — {{ articolo.data|date:"d/m/Y" }}</p>
+    {% empty %}
+        <p>Nessun articolo trovato.</p>
+    {% endfor %}
+    <hr>
+
+    <h2>17. Giornalisti con almeno un articolo che ha 100 o più visualizzazioni</h2>
+    {% for giornalista in giornalisti_con_articoli_popolari %}
+        <p>{{ giornalista }}</p>
+    {% empty %}
+        <p>Nessun giornalista trovato.</p>
+    {% endfor %}
+    <hr>
+
+    <h2>18. Articoli che soddisfano entrambe le condizioni (AND)</h2>
+    <p>Vengono mostrati gli articoli il cui giornalista è nato dopo il 1 gennaio 1990 e che hanno almeno 50 visualizzazioni. Devono essere vere entrambe le condizioni.</p>
+    {% for articolo in articoli_con_and %}
+        <p>{{ articolo.titolo }} — {{ articolo.giornalista }} — {{ articolo.visualizzazioni }} visualizzazioni</p>
+    {% empty %}
+        <p>Nessun articolo trovato.</p>
+    {% endfor %}
+    <hr>
+
+    <h2>19. Articoli che soddisfano almeno una condizione (OR)</h2>
+    <p>Vengono mostrati gli articoli il cui giornalista è nato dopo il 1 gennaio 1990 oppure che hanno al massimo 50 visualizzazioni. È sufficiente che sia vera una delle due condizioni.</p>
+    {% for articolo in articoli_con_or %}
+        <p>{{ articolo.titolo }} — {{ articolo.giornalista }} — {{ articolo.visualizzazioni }} visualizzazioni</p>
+    {% empty %}
+        <p>Nessun articolo trovato.</p>
+    {% endfor %}
+    <hr>
+
+    <h2>20. Articoli con giornalista nato dal 1 gennaio 1990 in poi (NOT)</h2>
+    <p>La query esclude gli articoli dei giornalisti nati prima del 1 gennaio 1990.</p>
+    {% for articolo in articoli_con_not %}
+        <p>{{ articolo.titolo }} — {{ articolo.giornalista }}</p>
+    {% empty %}
+        <p>Nessun articolo trovato.</p>
+    {% endfor %}
+    <p>Lo stesso filtro si può scrivere anche usando <code>exclude()</code>.</p>
 {% endblock content %}

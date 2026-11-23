@@ -2,6 +2,7 @@ import datetime
 
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.db.models import Q
 from .models import Articolo, Giornalista
 
 # Create your views here.
@@ -118,6 +119,39 @@ def queryBase(request):
     # 15. Tutti gli articoli che contengono una certa parola nel titolo:
     articoli_parola = Articolo.objects.filter(titolo__icontains='importante')
 
+    # 16. Articoli pubblicati a gennaio 2023:
+    articoli_mese_anno = Articolo.objects.filter(data__month=1, data__year=2023)
+
+    # 17. Giornalisti con almeno un articolo con 100 o più visualizzazioni:
+    giornalisti_con_articoli_popolari = Giornalista.objects.filter(
+        articoli__visualizzazioni__gte=100
+    ).distinct()
+
+    data_limite = datetime.date(1990, 1, 1)
+    visualizzazioni_limite = 50
+
+    # 18. Articoli il cui giornalista è nato dopo la data limite
+    # e che hanno almeno 50 visualizzazioni:
+    articoli_con_and = Articolo.objects.filter(
+        giornalista__anno_nascita__gt=data_limite,
+        visualizzazioni__gte=visualizzazioni_limite,
+    )
+
+    # 19. Articoli il cui giornalista è nato dopo la data limite
+    # oppure che hanno al massimo 50 visualizzazioni:
+    articoli_con_or = Articolo.objects.filter(
+        Q(giornalista__anno_nascita__gt=data_limite)
+        | Q(visualizzazioni__lte=visualizzazioni_limite)
+    )
+
+    # 20. Articoli il cui giornalista non è nato prima della data limite.
+    articoli_con_not = Articolo.objects.filter(
+        ~Q(giornalista__anno_nascita__lt=data_limite)
+    )
+    articoli_con_not_exclude = Articolo.objects.exclude(
+        giornalista__anno_nascita__lt=data_limite
+    )
+
     # Creare il dizionario context
     context = {
         'articoli_cognome': articoli_cognome,
@@ -136,6 +170,12 @@ def queryBase(request):
         'ultimi': ultimi,
         'articoli_minime_visualizzazioni': articoli_minime_visualizzazioni,
         'articoli_parola': articoli_parola,
+        'articoli_mese_anno': articoli_mese_anno,
+        'giornalisti_con_articoli_popolari': giornalisti_con_articoli_popolari,
+        'articoli_con_and': articoli_con_and,
+        'articoli_con_or': articoli_con_or,
+        'articoli_con_not': articoli_con_not,
+        'articoli_con_not_exclude': articoli_con_not_exclude,
     }
 
     return render(request, 'news/query.html', context)
